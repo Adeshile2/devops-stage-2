@@ -17,15 +17,15 @@ To get started with this template, please follow the instructions in the respect
 
 - [Frontend README](./frontend/README.md)
 - [Backend README](./backend/README.md)
+
 ## Running as Docker Container
 
-Ensure you have docker installed to do this, to check if docker is installed correctly run:
+Prerequisite: Ensure you have docker installed , to check if docker is installed correctly run:
 
 ```
 docker -v
 ```
-
-and you shpuld see the version of you installed docker application.
+the docker version installed should be displayed.
 
 Clone the [repository](https://github.com/sodiadrhain/dockerized-react-fast-api.git) and proceed with the instructions below.
 
@@ -39,7 +39,7 @@ docker-compose up -d
 
 this will build all images and run the app containers.
 
-Frontend will run on PORT 5173, Backend: 8000, Postgres: 5432, Adminer: 8080, Nginx proxy manager: 8090
+Frontend should run on PORT 5173, Backend: 8000, Postgres: 5432, Adminer: 8080, Nginx proxy manager: 8090
 
 
 ### Viewing the running ports
@@ -106,6 +106,6 @@ First setup an AWS Linux environment, you can use the `Amazon Linux VM`.
 
 Next Install GIT and Docker into the environment. 
 
-Then clone this repository and cd to the frontend, now follow the [Running as Docker Container](#running-as-docker-container) steps above. the app should start, with everthing being okay.
+Then clone your repository and cd to the frontend, now follow the [Running as Docker Container](#running-as-docker-container) steps above. the app should start, with everthing being okay.
 
 Now visit: `http://<public-ip-address>:<desired-app-port>` to see the app running.

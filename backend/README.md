@@ -56,13 +56,13 @@ and you should see the version of you installed docker application.
 **From within the project directory (/backend) run the following:**
 
 ```
-docker build -t backend_fast_api_image:latest .
+docker build -t my_fastapi_app:latest .
 ```
 
 to build image and container for app, when done, run:
 
 ```
-docker run -p 8000:8000 --name backend_fast_api -d backend_fast_api_image:latest
+docker run -p 8000:8000 --name my_fastapi_app -d my_fastapi_app:latest
 ```
 
 when this is done, app will basically start on port `8000`.
@@ -82,7 +82,7 @@ docker ps
 You will be given a printout showing your running containers. Part of the printout should contain something like this:
 
 ```
-.....   0.0.0.0:5173->8000/tcp,     backend_fast_api
+.....   0.0.0.0:5173->8000/tcp,     my_fastapi_app
 
 ```
 
@@ -93,7 +93,7 @@ This tells you that the various machines exist "locally" at 0.0.0.0 and that the
 To stop the docker development environment, issue the following command from the project root:
 
 ```
-docker container stop backend_fast_api
+docker container stop my_fastapi_app
 ```
 
 This will stop all the container and related to this project.
@@ -103,7 +103,7 @@ This will stop all the container and related to this project.
 To start the docker development environment another time run:
 
 ```
-docker container start backend_fast_api
+docker container start my_fastapi_app
 ```
 
 This will start the container again.
@@ -119,13 +119,6 @@ Thus your adventure begins... The project is up and running.
 Ensure you update the necessary configurations in the `.env` file, particularly the database configuration.
 
 
-## Deploying as python app - Manually
-
-You can follow the steps below from any of the host platforms you wish to use.
-
-Plaforms include:  [Heroku](https://devcenter.heroku.com/articles/getting-started-with-python?singlepage=true), [Render](https://docs.render.com/deploy-fastapi).
-
-
 ## Deploying as Docker App
 
 You can deploy to AWS EC2 as a docker app.
@@ -137,5 +130,3 @@ Next Install GIT and Docker into the environment.
 Then clone this repository and cd to the frontend, now follow the [Running as Docker Container](#running-as-docker-container) steps above. the app should start, with everthing being okay.
 
 Now visit: `http://<public-ip-address>:8000` to see the app running.
-
-You can also deploy as Docker file on [Heroku](https://devcenter.heroku.com/articles/container-registry-and-runtime) and [Render](https://docs.render.com/deploy-an-image).
