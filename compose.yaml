@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: my_fastapi_app
+    environment:
+      - POSTGRES_USER=app
+      - POSTGRES_DB=app
+      - POSTGRES_PASSWORD=changethis123
+      - POSTGRES_SERVER=postgres
+    ports:
+      - "8000:8000"
+    restart: "no"
+    depends_on:
+      - postgres
+      
+    networks:
+      - main_network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: my_node_app
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    command: npm run dev -- --host
+    networks:
+      - main_network
+
+  adminer:
+    container_name: adminer
+    image: adminer
+    ports:
+      - "8080:8080"
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres
+    depends_on:
+      - postgres
+    networks:
+      - main_network
+   
+  proxymanager:
+   image: 'jc21/nginx-proxy-manager:latest'
+   container_name: nginxproxymanager
+   restart: unless-stopped
+   volumes:
+      - npm_data:/data
+      - npm_data:/etc/letsencrypt
+   ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+   networks:
+      - main_network
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=app
+      - POSTGRES_DB=app
+      - POSTGRES_PASSWORD=changethis123
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - main_network
+
+volumes:
+  postgres_data:
+  npm_data:
+
+networks:
+  main_network:
+    driver: bridge
