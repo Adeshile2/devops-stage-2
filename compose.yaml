@@ -6,11 +6,8 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: my_fastapi_app
-    environment:
-      - POSTGRES_USER=app
-      - POSTGRES_DB=app
-      - POSTGRES_PASSWORD=changethis123
-      - POSTGRES_SERVER=postgres
+     environment:
+      env_file: ".env"
     ports:
       - "8000:8000"
     restart: "no"
@@ -27,6 +24,8 @@ services:
     container_name: my_node_app
     ports:
       - "5173:5173"
+     environment:
+      env_file: ".env"
     depends_on:
       - backend
     command: npm run dev -- --host
